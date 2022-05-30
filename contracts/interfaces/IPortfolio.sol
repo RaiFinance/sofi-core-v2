@@ -47,8 +47,6 @@ interface IPortfolio is IERC20 {
 
     function invoke(address _target, uint256 _value, bytes calldata _data) external returns(bytes memory);
 
-    function editPositionMultiplier(int256 _newMultiplier) external;
-
     function mint(address _account, uint256 _quantity) external;
     function burn(address _account, uint256 _quantity) external;
 

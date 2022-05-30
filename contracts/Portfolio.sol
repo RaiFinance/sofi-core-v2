@@ -200,15 +200,6 @@ contract Portfolio is ERC20 {
     }
 
     
-    function editPositionMultiplier(int256 _newMultiplier) external onlyModule whenLockedOnlyLocker {        
-        _validateNewMultiplier(_newMultiplier);
-
-        positionMultiplier = _newMultiplier;
-
-        emit PositionMultiplierEdited(_newMultiplier);
-    }
-
-    
     function mint(address _account, uint256 _quantity) external onlyModule whenLockedOnlyLocker {
         _mint(_account, _quantity);
     }
