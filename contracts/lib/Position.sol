@@ -62,39 +62,6 @@ library Position {
     }
 
     
-    function editExternalPosition(
-        IPortfolio _portfolio,
-        address _component,
-        address _module,
-        int256 _newUnit,
-        bytes memory _data
-    )
-        internal
-    {
-        if (_newUnit != 0) {
-            if (!_portfolio.isComponent(_component)) {
-                _portfolio.addComponent(_component);
-                _portfolio.addExternalPositionModule(_component, _module);
-            } else if (!_portfolio.isExternalPositionModule(_component, _module)) {
-                _portfolio.addExternalPositionModule(_component, _module);
-            }
-            _portfolio.editExternalPositionUnit(_component, _module, _newUnit);
-            _portfolio.editExternalPositionData(_component, _module, _data);
-        } else {
-            require(_data.length == 0, "Passed data must be null");
-            
-            if (_portfolio.getExternalPositionRealUnit(_component, _module) != 0) {
-                address[] memory positionModules = _portfolio.getExternalPositionModules(_component);
-                if (_portfolio.getDefaultPositionRealUnit(_component) == 0 && positionModules.length == 1) {
-                    require(positionModules[0] == _module, "External positions must be 0 to remove component");
-                    _portfolio.removeComponent(_component);
-                }
-                _portfolio.removeExternalPositionModule(_component, _module);
-            }
-        }
-    }
-
-    
     function getDefaultTotalNotional(uint256 _portfolioSupply, uint256 _positionUnit) internal pure returns (uint256) {
         return _portfolioSupply.preciseMul(_positionUnit);
     }

@@ -144,61 +144,6 @@ contract Portfolio is ERC20 {
         emit DefaultPositionUnitEdited(_component, _realUnit);
     }
 
-    function addExternalPositionModule(address _component, address _positionModule) external onlyModule whenLockedOnlyLocker {
-        require(!isExternalPositionModule(_component, _positionModule), "Module already added");
-
-        componentPositions[_component].externalPositionModules.push(_positionModule);
-
-        emit PositionModuleAdded(_component, _positionModule);
-    }
-
-    function removeExternalPositionModule(
-        address _component,
-        address _positionModule
-    )
-        external
-        onlyModule
-        whenLockedOnlyLocker
-    {
-        componentPositions[_component].externalPositionModules.removeStorage(_positionModule);
-
-        delete componentPositions[_component].externalPositions[_positionModule];
-
-        emit PositionModuleRemoved(_component, _positionModule);
-    }
-
-    
-    function editExternalPositionUnit(
-        address _component,
-        address _positionModule,
-        int256 _realUnit
-    )
-        external
-        onlyModule
-        whenLockedOnlyLocker
-    {
-        int256 virtualUnit = _convertRealToVirtualUnit(_realUnit);
-
-        componentPositions[_component].externalPositions[_positionModule].virtualUnit = virtualUnit;
-
-        emit ExternalPositionUnitEdited(_component, _positionModule, _realUnit);
-    }
-
-    
-    function editExternalPositionData(
-        address _component,
-        address _positionModule,
-        bytes calldata _data
-    )
-        external
-        onlyModule
-        whenLockedOnlyLocker
-    {
-        componentPositions[_component].externalPositions[_positionModule].data = _data;
-
-        emit ExternalPositionDataEdited(_component, _positionModule, _data);
-    }
-
     
     function mint(address _account, uint256 _quantity) external onlyModule whenLockedOnlyLocker {
         _mint(_account, _quantity);

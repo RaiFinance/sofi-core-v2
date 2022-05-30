@@ -40,10 +40,6 @@ interface IPortfolio is IERC20 {
     function addComponent(address _component) external;
     function removeComponent(address _component) external;
     function editDefaultPositionUnit(address _component, int256 _realUnit) external;
-    function addExternalPositionModule(address _component, address _positionModule) external;
-    function removeExternalPositionModule(address _component, address _positionModule) external;
-    function editExternalPositionUnit(address _component, address _positionModule, int256 _realUnit) external;
-    function editExternalPositionData(address _component, address _positionModule, bytes calldata _data) external;
 
     function invoke(address _target, uint256 _value, bytes calldata _data) external returns(bytes memory);
 
