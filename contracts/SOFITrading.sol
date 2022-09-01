@@ -236,7 +236,7 @@ contract SOFITrading is ReentrancyGuard {
         uint256 sumEth = 0;
         for (uint256 i = 0; i < _components.length; i++) {
             sumEth = _routers[i] == address(0)
-                ? sumEth.add(_amountComponents[i])
+                ? sumEth.add(0)
                 : sumEth.add(sofiProxy.tradeTokenByExactToken(_routers[i], _components[i], WETH, _amountComponents[i], 0, address(this)));
         }
         return sumEth;
@@ -262,8 +262,12 @@ contract SOFITrading is ReentrancyGuard {
 
             uint256 unit = uint256(_portfolio.getDefaultPositionRealUnit(_components[i]));
             amountComponents[i] = unit.preciseMul(_amountPortfolio);
-
-            (amountEth, routers[i], ) = sofiProxy.getMaxAmountOut(amountComponents[i], _components[i], WETH);
+            if (amountComponents[i] <= 0) {
+                amountEth = 0;
+                routers[i] = address(0);
+            } else {
+                (amountEth, routers[i], ) = sofiProxy.getMaxAmountOut(amountComponents[i], _components[i], WETH);
+            }
             sumEth = sumEth.add(amountEth);
         }
         return (sumEth, amountComponents, routers);
@@ -271,8 +275,12 @@ contract SOFITrading is ReentrancyGuard {
 
     function _tradeTokenByExactToken(IERC20 _tokenIn, address _tokenOut, uint256 _amountIn) internal returns (uint256) {
         (, address _router, ) = sofiProxy.getMaxAmountOut(_amountIn, address(_tokenIn), _tokenOut);
-        _safeApprove(_tokenIn, address(sofiProxy), _amountIn);
-        return sofiProxy.tradeTokenByExactToken(_router, address(_tokenIn), _tokenOut, _amountIn, 0, address(this));
+        if (_router == address(0)) {
+            return 0;
+        } else {
+            _safeApprove(_tokenIn, address(sofiProxy), _amountIn);
+            return sofiProxy.tradeTokenByExactToken(_router, address(_tokenIn), _tokenOut, _amountIn, 0, address(this));
+        }
     }
 
     function _safeApprove(IERC20 _token, address _spender, uint256 _requiredAllowance) internal {

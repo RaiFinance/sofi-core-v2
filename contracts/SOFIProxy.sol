@@ -231,7 +231,6 @@ contract SOFIProxy is Ownable {
             }
         }
 
-        require(_maxAmountOut > 0, "SOFIProxy: LIQUID_INVALID");
         return (_maxAmountOut, _maxRouter, _maxPair);
     }
 
