@@ -235,9 +235,14 @@ contract SOFITrading is ReentrancyGuard {
     {
         uint256 sumEth = 0;
         for (uint256 i = 0; i < _components.length; i++) {
-            sumEth = _routers[i] == address(0)
+            if (_components[i] == WETH) {
+                sumEth = sumEth.add(_amountComponents[i]);
+            } else {
+                sumEth = _routers[i] == address(0)
                 ? sumEth.add(0)
                 : sumEth.add(sofiProxy.tradeTokenByExactToken(_routers[i], _components[i], WETH, _amountComponents[i], 0, address(this)));
+            }
+            
         }
         return sumEth;
     }
