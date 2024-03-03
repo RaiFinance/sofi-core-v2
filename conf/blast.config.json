@@ -1,0 +1,34 @@
+{   
+    "factory": "0xDA6b3B31177a07E157c170A31cF9C85e64f35d27",
+    "router":"0xcdCe9e57CB1cA1e7EA129bC211e8F3741C4dC898",
+    "from":"0x4F0D938A81343A5Fb10d6BB20BF5996E2e557586",
+    "routers":{
+        "SoSwap":"0xcdCe9e57CB1cA1e7EA129bC211e8F3741C4dC898",
+        "UniSwap":"",
+        "SushiSwap":""
+    },
+    "erc20":{
+        "ETH":"0x0000000000000000000000000000000000000000",
+        "WETH":"0x7D40C46CaD2C6Ade6440008f74dFb66b3FC947E4",
+        "SOFI":"0x12BF894c47D9246e92F58d6AE22E1A32fd6D306E"
+    },
+    "multiCall":"0x19e9338be738c7e51b2126A5e7B6A4c1ecB03DC2",
+    "portfolioAllowedTokens":[
+        "0x0000000000000000000000000000000000000000",
+        "0x7D40C46CaD2C6Ade6440008f74dFb66b3FC947E4",
+        "0x12BF894c47D9246e92F58d6AE22E1A32fd6D306E"
+    ],
+    "proxy":"0xcD206e0C843b72B39D20efE28B8190c4E142b862",
+    "controller":"0xe9809d71259fcCB94447a1449d3989d4A6c28927",
+    "portfolioFactory":"0x84B80DeAF0fae24DB776C5839a64c1b4496Ea6d5",
+    "portfolioModule":"0xD55a4d54f39baF26da2F3EE7bE9a6388c15F9831",
+    "managerModule":"0x6A9c7d126d17c35785d06D9AE17f6215ffE425e9",
+    "integrationRegistry":"0x8e7DB24eB395BD2965E0701b364ACdB67b9Dea8f",
+    "sofiProxyAdapter":"0x67d58a653E813Fe97e2E6392F3Fd31a3c27540C9",
+    "sofiTrading":"0x10e9cB84C2002392412A627D12d4F3dF4568246c",
+    "portfolio":"",
+    "protocolViewer":"0xDEDaaE2ACF3ab0cD7754d5aB26b317e52B02c8cd",
+    "timelock":"",
+    "promote":"",
+    "multiSig":""
+}
